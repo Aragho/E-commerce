@@ -11,9 +11,9 @@ export default function HomePage() {
   if (isError) return <div>Error: {error?.message || 'Something went wrong'}</div>;
 
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen " >
 
-      {/* Hero Section with Background */}
+    
       <div className="relative w-full h-[60vh] md:h-screen">
         <img
           src={background}
@@ -52,7 +52,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Brand Section */}
+      
       <div className="bg-black text-white flex flex-wrap justify-around items-center py-6">
         <h1 className="font-playfair text-xl font-bold uppercase">VerSace</h1>
         <h1 className="font-playfair text-xl font-bold uppercase">ZARA</h1>
@@ -61,7 +61,7 @@ export default function HomePage() {
         <h1 className="font-playfair text-xl font-bold uppercase">Calvin Klein</h1>
       </div>
 
-      {/* Products Display */}
+      
       <div className="py-10 px-4">
         {data?.products && data.products.length > 0 ? (
           <Cards data={data.products} />

@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { CiShoppingCart } from "react-icons/ci";
 import { IoMdContact } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
-import { GiHamburgerMenu } from "react-icons/gi"; 
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoMdClose } from "react-icons/io"; 
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -24,28 +25,42 @@ export default function Header() {
       <div className="container mx-auto flex justify-between items-center py-4 px-4">
         <h2 className="text-2xl font-bold text-black">SHOP.CO</h2>
 
-        
+    
         <div className="md:hidden">
           <button onClick={toggleMenu} className="text-black">
             <GiHamburgerMenu size={30} />
           </button>
         </div>
 
-      
+        
         {isMenuOpen && (
-          <div className="absolute top-0 left-0 w-full bg-white p-4 space-y-4 md:hidden text-center z-10">
+          <div className="absolute top-0 left-0 w-full h-full bg-white p-4 space-y-4 md:hidden text-center z-10">
+            <div className="flex justify-end">
+              <button onClick={toggleMenu} className="text-black">
+                <IoMdClose size={30} />
+              </button>
+            </div>
+
             <ul className="space-y-4">
               <li>
-                <Link to="/shop" className="text-black hover:text-blue-500" onClick={toggleMenu}>Shop</Link>
+                <Link to="/shop" className="text-black hover:text-blue-500" onClick={toggleMenu}>
+                  Shop
+                </Link>
               </li>
               <li>
-                <Link to="/on-sale" className="text-black hover:text-blue-500" onClick={toggleMenu}>On Sale</Link>
+                <Link to="/on-sale" className="text-black hover:text-blue-500" onClick={toggleMenu}>
+                  On Sale
+                </Link>
               </li>
               <li>
-                <Link to="/new-arrivals" className="text-black hover:text-blue-500" onClick={toggleMenu}>New Arrivals</Link>
+                <Link to="/new-arrivals" className="text-black hover:text-blue-500" onClick={toggleMenu}>
+                  New Arrivals
+                </Link>
               </li>
               <li>
-                <Link to="/brands" className="text-black hover:text-blue-500" onClick={toggleMenu}>Brands</Link>
+                <Link to="/brands" className="text-black hover:text-blue-500" onClick={toggleMenu}>
+                  Brands
+                </Link>
               </li>
             </ul>
 
@@ -90,7 +105,7 @@ export default function Header() {
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600" size={20} />
           </div>
 
-        
+          
           <div className="flex space-x-4">
             <Link to="/cart" className="text-black hover:text-blue-500" aria-label="Shopping Cart">
               <CiShoppingCart size={24} />
