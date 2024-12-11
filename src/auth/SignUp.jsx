@@ -57,7 +57,7 @@ const SignUp = () => {
     localStorage.setItem("users", JSON.stringify([...users, data]));
 
     setError("");
-    setSuccess("Registration successful! Redirecting to login...");
+    setSuccess("Registration successful!");
 
     setTimeout(() => {
       navigate("/login");
