@@ -25,16 +25,16 @@ export default function Header() {
       <div className="container mx-auto flex justify-between items-center py-4 px-4">
         <h2 className="text-2xl font-bold text-black">SHOP.CO</h2>
 
-    
         <div className="md:hidden">
-          <button onClick={toggleMenu} className="text-black">
-            <GiHamburgerMenu size={30} />
-          </button>
+          {!isMenuOpen && (
+            <button onClick={toggleMenu} className="text-black">
+              <GiHamburgerMenu size={30} />
+            </button>
+          )}
         </div>
 
-        
         {isMenuOpen && (
-          <div className="absolute top-0 left-0 w-full h-full bg-white p-4 space-y-4 md:hidden text-center z-10">
+          <div className=" top-0 left-0 w-full h-full bg-white p-4 space-y-4 md:hidden text-center z-10">
             <div className="flex justify-end">
               <button onClick={toggleMenu} className="text-black">
                 <IoMdClose size={30} />
@@ -64,7 +64,6 @@ export default function Header() {
               </li>
             </ul>
 
-            
             <div className="relative mt-4">
               <input
                 type="text"
@@ -76,7 +75,6 @@ export default function Header() {
           </div>
         )}
 
-        
         <nav className="hidden md:flex space-x-6 text-black font-medium">
           <ul className="flex space-x-6">
             <li className="hover:text-blue-500">
@@ -95,7 +93,6 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center space-x-6">
-        
           <div className="relative hidden md:block">
             <input
               type="text"
@@ -105,7 +102,6 @@ export default function Header() {
             <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600" size={20} />
           </div>
 
-          
           <div className="flex space-x-4">
             <Link to="/cart" className="text-black hover:text-blue-500" aria-label="Shopping Cart">
               <CiShoppingCart size={24} />
