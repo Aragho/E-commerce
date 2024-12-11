@@ -19,15 +19,15 @@ const Login = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-sm">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-100">
+      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full sm:w-auto max-w-sm">
+        <h2 className="text-2xl font-bold mb-6 text-center sm:text-left">Login</h2>
         <div className="mb-4">
           <input
             type="text"
             name="username"
             placeholder="Enter Username"
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-base text-sm"
             onChange={handleChange}
             required
           />
@@ -37,20 +37,20 @@ const Login = () => {
             type="password"
             name="password"
             placeholder="Enter Password"
-            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 sm:text-base text-sm"
             onChange={handleChange}
             required
           />
         </div>
-        <Link to="/home">
+        <Link to="/home" className="block w-full">
           <CustomButton
-            style="w-full bg-black  text-white py-2 rounded hover:bg-blue-600"
+            style="w-full bg-black text-white py-2 rounded hover:bg-blue-600"
             type="button"
             textContent="Login"
           />
         </Link>
       </form>
-      <div className="flex justify-between w-full max-w-sm text-sm">
+      <div className="flex flex-wrap justify-between items-center w-full max-w-sm text-sm space-y-2 sm:space-y-0 sm:space-x-2">
         <span>New User?</span>
         <Link to="/signup" className="text-blue-500 hover:underline">
           Register Here

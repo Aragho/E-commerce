@@ -8,12 +8,12 @@ export default function ProductDetailsPage() {
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [finalPrice, setFinalPrice] = useState(product.price);
+  const [finalPrice, setFinalPrice] = useState(product?.price || 0);
 
   // Update final price based on color or size selection
   useEffect(() => {
     if (selectedColor || selectedSize) {
-      let priceAdjustment = product.price;
+      let priceAdjustment = product?.price || 0;
 
       // Example price adjustments for different color or size selections
       if (selectedColor === 'Red') {
@@ -25,9 +25,9 @@ export default function ProductDetailsPage() {
 
       setFinalPrice(priceAdjustment);
     } else {
-      setFinalPrice(product.price);
+      setFinalPrice(product?.price || 0);
     }
-  }, [selectedColor, selectedSize, product.price]);
+  }, [selectedColor, selectedSize, product?.price]);
 
   const handleAddToCart = () => {
     if (!selectedColor || !selectedSize) {
@@ -51,47 +51,53 @@ export default function ProductDetailsPage() {
     return <div>No product selected. Please go back and select a product.</div>;
   }
 
-  // Calculate discount price
-  const discountedPrice = product.discountPercentage
-    ? product.price - (product.price * product.discountPercentage / 100)
-    : product.price;
+  // Calculate discounted price
+  const discountedPrice = product?.discountPercentage
+    ? product?.price - (product?.price * product?.discountPercentage / 100)
+    : product?.price;
 
   return (
     <div className="p-4 max-w-4xl mx-auto">
+
       {/* Flex container to place image and details side by side */}
       <div className="flex flex-col md:flex-row items-center md:items-start">
+
         {/* Product Image */}
         <div className="md:w-1/2 mb-4 md:mb-0">
-          <img
-            src={product.thumbnail}
-            alt={product.title}
-            className="w-full h-auto object-cover rounded"
-          />
+          {product?.thumbnail ? (
+            <img
+              src={product?.thumbnail}
+              alt={product?.title}
+              className="w-full h-auto object-cover rounded"
+            />
+          ) : (
+            <div className="bg-gray-300 w-full h-64 flex items-center justify-center text-white">No Image Available</div>
+          )}
         </div>
 
         {/* Product Details */}
         <div className="md:w-1/2 md:ml-8">
           {/* Product Title */}
-          <h1 className="text-3xl font-bold mb-2">{product.title}</h1>
+          <h1 className="text-3xl font-bold mb-2">{product?.title}</h1>
 
           {/* Product Rating */}
-          <p className="text-sm text-gray-500 mb-4">Rating: {product.rating} / 5</p>
+          <p className="text-sm text-gray-500 mb-4">Rating: {product?.rating} / 5</p>
 
           {/* Product Price with Discount */}
           <div className="flex items-baseline mb-4">
             <p className="text-xl text-black font-bold">${finalPrice.toFixed(2)}</p>
-            {product.discountPercentage && (
+            {product?.discountPercentage && (
               <p className="text-sm line-through text-gray-500 ml-2">
-                ${product.price.toFixed(2)}
+                ${product?.price.toFixed(2)}
               </p>
             )}
-            {product.discountPercentage && (
-              <p className="text-sm text-red-500 ml-2">-{product.discountPercentage}%</p>
+            {product?.discountPercentage && (
+              <p className="text-sm text-red-500 ml-2">-{product?.discountPercentage}%</p>
             )}
           </div>
 
           {/* Product Description */}
-          <p className="text-gray-700 mb-6">{product.description}</p>
+          <p className="text-gray-700 mb-6">{product?.description || 'No description available.'}</p>
 
           {/* Select Color */}
           <div className="mt-4">
@@ -100,9 +106,7 @@ export default function ProductDetailsPage() {
               {['Black', 'White', 'Gray'].map((color) => (
                 <button
                   key={color}
-                  className={`px-4 py-2 border rounded ${
-                    selectedColor === color ? 'bg-black text-white' : ''
-                  }`}
+                  className={`px-4 py-2 border rounded ${selectedColor === color ? 'bg-black text-white' : ''}`}
                   onClick={() => setSelectedColor(color)}
                 >
                   {color}
@@ -118,9 +122,7 @@ export default function ProductDetailsPage() {
               {['Small', 'Medium', 'Large', 'X-Large'].map((size) => (
                 <button
                   key={size}
-                  className={`px-4 py-2 border rounded ${
-                    selectedSize === size ? 'bg-black text-white' : ''
-                  }`}
+                  className={`px-4 py-2 border rounded ${selectedSize === size ? 'bg-black text-white' : ''}`}
                   onClick={() => setSelectedSize(size)}
                 >
                   {size}
@@ -136,6 +138,7 @@ export default function ProductDetailsPage() {
               <button
                 className="px-4 py-2 border rounded"
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                disabled={quantity === 1}
               >
                 -
               </button>
