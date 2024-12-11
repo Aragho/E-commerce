@@ -33,20 +33,32 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <ul className="absolute top-0 left-0 w-full bg-white p-4 space-y-4 md:hidden text-center">
-            <li>
-              <Link to="/shop" className="text-black hover:text-blue-500" onClick={toggleMenu}>Shop</Link>
-            </li>
-            <li>
-              <Link to="/on-sale" className="text-black hover:text-blue-500" onClick={toggleMenu}>On Sale</Link>
-            </li>
-            <li>
-              <Link to="/new-arrivals" className="text-black hover:text-blue-500" onClick={toggleMenu}>New Arrivals</Link>
-            </li>
-            <li>
-              <Link to="/brands" className="text-black hover:text-blue-500" onClick={toggleMenu}>Brands</Link>
-            </li>
-          </ul>
+          <div className="absolute top-0 left-0 w-full bg-white p-4 space-y-4 md:hidden text-center z-10">
+            <ul className="space-y-4">
+              <li>
+                <Link to="/shop" className="text-black hover:text-blue-500" onClick={toggleMenu}>Shop</Link>
+              </li>
+              <li>
+                <Link to="/on-sale" className="text-black hover:text-blue-500" onClick={toggleMenu}>On Sale</Link>
+              </li>
+              <li>
+                <Link to="/new-arrivals" className="text-black hover:text-blue-500" onClick={toggleMenu}>New Arrivals</Link>
+              </li>
+              <li>
+                <Link to="/brands" className="text-black hover:text-blue-500" onClick={toggleMenu}>Brands</Link>
+              </li>
+            </ul>
+
+            {/* Mobile Search Bar */}
+            <div className="relative mt-4">
+              <input
+                type="text"
+                placeholder="Search For Products"
+                className="w-full border border-gray-300 rounded-lg py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-black"
+              />
+              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600" size={20} />
+            </div>
+          </div>
         )}
 
         {/* Desktop Navigation */}
@@ -68,7 +80,7 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center space-x-6">
-          {/* Search Bar */}
+          {/* Desktop Search Bar */}
           <div className="relative hidden md:block">
             <input
               type="text"
