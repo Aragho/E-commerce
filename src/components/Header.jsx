@@ -16,7 +16,7 @@ export default function Header() {
     <header className="bg-white text-black">
       <div className="bg-black text-white text-center py-2">
         <span className="mr-2">Sign up and get 20% off your first order.</span>
-        <Link to="/signup" className="underline font-semibold hover:text-black">
+        <Link to="/signup" className="underline font-semibold hover:text-blue-600">
           Sign Up Now
         </Link>
       </div>

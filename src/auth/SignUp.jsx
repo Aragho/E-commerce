@@ -12,6 +12,8 @@ const SignUp = () => {
   };
 
   const [data, setData] = useState(userDetails);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -21,10 +23,45 @@ const SignUp = () => {
     }));
   }
 
+  
+  const validateForm = () => {
+    const { username, email, password } = data;
+
+    if (!username.trim()) {
+      return "Username is required.";
+    }
+
+    if (!email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return "Please enter a valid email address.";
+    }
+
+    if (!password.trim() || password.length < 6) {
+      return "Password must be at least 6 characters long.";
+    }
+
+    return null; 
+  };
+
   const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
-    console.log("Submitted....", data);
-    navigate("/login");
+    event.preventDefault();
+
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      setSuccess("");
+      return;
+    }
+
+    
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    localStorage.setItem("users", JSON.stringify([...users, data]));
+
+    setError("");
+    setSuccess("Registration successful! Redirecting to login...");
+
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
   };
 
   return (
@@ -34,6 +71,8 @@ const SignUp = () => {
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full sm:w-auto max-w-md"
       >
         <h2 className="text-2xl font-bold mb-6 text-center sm:text-left">Sign Up</h2>
+        {error && <p className="text-red-500 text-sm mb-4">{error}</p>} 
+        {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
         <div className="space-y-4">
           <div>
             <input

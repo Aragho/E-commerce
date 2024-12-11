@@ -1,5 +1,5 @@
 import Layout from "../layout/Layout";
-// import SignUp from "../auth/signUp";
+import SignUp from "../auth/signUp";
 import Login from "../auth/login";
 import ProductDetailsPage from "../pages/ProductDetailsPage"
 import HomePage from "../pages/Homepage/HomePage";
@@ -12,10 +12,10 @@ const ROUTES = [
         path: "/",
         element:<Layout/>,
         children:[
-            // {
-            //     path: "/signup",
-            //     element:<SignUp/>
-            // },
+            {
+                path: "/signup",
+                element:<SignUp/>
+            },
 
             {
                 path: "/productDetails",
