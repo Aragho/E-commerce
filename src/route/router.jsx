@@ -1,5 +1,5 @@
 import Layout from "../layout/Layout";
-import SignUp from "../auth/SignUp;"
+import SignUp from "../auth/SignUp";
 import Login from "../auth/login";
 import ProductDetailsPage from "../pages/ProductDetailsPage"
 import HomePage from "../pages/Homepage/HomePage";
