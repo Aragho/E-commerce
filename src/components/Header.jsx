@@ -5,9 +5,13 @@ import { IoMdContact } from "react-icons/io";
 import { FaSearch } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io"; 
+import { useSelector } from 'react-redux';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Access cart item count from Redux state with safeguard
+  const cartItemCount = useSelector((state) => state.cart?.totalItems || 0);  // Default to 0 if undefined
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -103,9 +107,16 @@ export default function Header() {
           </div>
 
           <div className="flex space-x-4">
-            <Link to="/cart" className="text-black hover:text-blue-500" aria-label="Shopping Cart">
-              <CiShoppingCart size={24} />
-            </Link>
+            <div className="relative">
+              <Link to="/cart" className="text-black hover:text-blue-500" aria-label="Shopping Cart">
+                <CiShoppingCart size={24} />
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs font-bold text-white">
+                    {cartItemCount}
+                  </span>
+                )}
+              </Link>
+            </div>
             <Link to="/contact" className="text-black hover:text-blue-500" aria-label="Contact Us">
               <IoMdContact size={24} />
             </Link>

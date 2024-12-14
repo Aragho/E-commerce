@@ -1,8 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation , useNavigate} from 'react-router-dom';
+import { useCart } from './CartContext'; // Import the hook
 
-export default function ProductDetailsPage() {
+export default function DetailsPage() {
   const { state: product } = useLocation();
+  const { addToCart } = useCart(); // Use the addToCart function
+  const navigate = useNavigate(); // Use the navigate function
 
   if (!product) {
     return <div>No product selected. Please go back and select a product.</div>;
@@ -12,7 +15,6 @@ export default function ProductDetailsPage() {
   const [selectedSize, setSelectedSize] = useState('');
   const [quantity, setQuantity] = useState(1);
 
-  
   const finalPrice = useMemo(() => {
     let priceAdjustment = product.price || 0;
 
@@ -36,8 +38,9 @@ export default function ProductDetailsPage() {
       finalPrice,
     };
 
-    console.log('Item added to cart:', cartItem);
+    addToCart(cartItem); // Add item to the cart
     alert('Item added to cart!');
+    navigate('/cart'); // Navigate to the cart page
   };
 
   return (
@@ -55,15 +58,10 @@ export default function ProductDetailsPage() {
           )}
         </div>
 
-        
         <div className="md:w-1/2 md:ml-8">
-      
           <h1 className="text-3xl font-bold mb-2">{product?.title}</h1>
-
-          
           <p className="text-sm text-gray-500 mb-4">Rating: {product?.rating} / 5</p>
 
-          
           <div className="flex items-baseline mb-4">
             <p className="text-xl text-black font-bold">${finalPrice.toFixed(2)}</p>
             {product?.discountPercentage && (
@@ -76,14 +74,12 @@ export default function ProductDetailsPage() {
             )}
           </div>
 
-          
           <p className="text-gray-700 mb-6">{product?.description || 'No description available.'}</p>
 
-          
           <div className="mt-4">
             <h2 className="font-bold text-sm">Select Colors</h2>
             <div className="flex space-x-2 mt-2">
-              {['Black', 'White', 'Gray'].map((color) => (
+              {['Black', 'White', 'Gray', 'Red'].map((color) => (
                 <button
                   key={color}
                   className={`px-4 py-2 border rounded ${selectedColor === color ? 'bg-black text-white' : ''}`}
@@ -95,7 +91,6 @@ export default function ProductDetailsPage() {
             </div>
           </div>
 
-      
           <div className="mt-4">
             <h2 className="font-bold text-sm">Choose Size</h2>
             <div className="flex space-x-2 mt-2">
@@ -111,7 +106,6 @@ export default function ProductDetailsPage() {
             </div>
           </div>
 
-          
           <div className="mt-4 flex">
             <h2 className="font-bold text-sm">Quantity</h2>
             <div className="flex items-center space-x-2 mt-2">
@@ -131,19 +125,15 @@ export default function ProductDetailsPage() {
               </button>
             </div>
             <button
-            className="mt-8 bg-black h-14 w-56 ml-16 mt[-15px] text-white py-2 rounded"
-            onClick={handleAddToCart}
-          >
-            Add to Cart
-          </button>
+              className="mt-8 bg-black h-14 w-56 ml-16 mt[-15px] text-white py-2 rounded"
+              onClick={handleAddToCart}
+            >
+              Add to Cart
+            </button>
           </div>
-
-          
-          
         </div>
       </div>
 
-      
       <div className="flex justify-between p-6 w-full mt-8">
         <h2 className="text-lg cursor-pointer">Product Details</h2>
         <h2 className="text-lg cursor-pointer">Rating & Reviews</h2>

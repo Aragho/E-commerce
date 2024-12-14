@@ -5,6 +5,7 @@ import ProductDetailsPage from "../pages/ProductDetailsPage"
 import HomePage from "../pages/Homepage/HomePage";
 import DetailsPage from "../pages/DetailsPage";
 import ReviewPage from "../pages/ReviewPage";
+import CartPage from "../pages/CartPage";
 
 const ROUTES = [
 
@@ -47,6 +48,11 @@ const ROUTES = [
                 path:"/review",
                 element:<ReviewPage/>
             },
+            {
+                path:"/cart",
+                element:<CartPage/>
+            },
+            
         
         ]
     },
