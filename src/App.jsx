@@ -1,13 +1,13 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { CartProvider } from './pages/CartContext';  // Import the CartProvider
-import ROUTES from './route/router';  // Your route definitions
+import { CartProvider } from './pages/CartContext'; 
+import ROUTES from './route/router';  
 
 const routes = createBrowserRouter([...ROUTES]);
 
 function App() {
   return (
-    <CartProvider>  {/* Wrap RouterProvider with CartProvider */}
+    <CartProvider>  
       <RouterProvider router={routes} />
     </CartProvider>
   );
